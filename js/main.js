@@ -27,12 +27,15 @@ jQuery(document).ready(function($) {
 
 
         // Current FEN should now be the starting position for the puzzle
-        // Set orientation based on who is to move
-		var gameOrientation = (game.turn() === 'b') ? 'black' : 'white';
-		var solutionIndex = 0
+        // Set orientation based on who is to move or user preference
+        var gameOrientation = (game.turn() === 'b') ? 'black' : 'white';
+        if (pluginParams.orientation && pluginParams.orientation !== 'auto') {
+            gameOrientation = pluginParams.orientation;
+        }
+                var solutionIndex = 0
         var cfg = {
                 draggable: true,
-				orientation: gameOrientation,
+                                orientation: gameOrientation,
                 position: fen,
                 pieceTheme: pluginParams.pieceThemeBase + '{piece}.png',
                 onDrop: function(source, target) {
